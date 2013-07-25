@@ -1,0 +1,12 @@
+<% if (!data) { %>
+    <p>nothings</p>
+<% } else { %>
+    <ul>
+    <% data.forEach(function(item){ %>
+        <li>
+            <h3><a href="<%= item.article.url %>" target="_blank"><%= item.article.title %></a></h3>
+            <p><%= item.article.excerpt %></p>
+        </li>
+    <% }) %>
+    </ul>
+<% } %>

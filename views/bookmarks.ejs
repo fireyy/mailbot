@@ -3,10 +3,28 @@
 <% } else { %>
     <ul>
     <% data.forEach(function(item){ %>
-        <li>
-            <h3><a href="<%= item.article.url %>" target="_blank"><%= item.article.title %></a></h3>
-            <p><%= item.article.excerpt %></p>
+        <li class="item_<%= item.article.id %>">
+            <p><input type="text" name="title_<%= item.article.id %>" value="<%= item.article.title %>"/></p>
+            <p><textarea name="desc_<%= item.article.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea></p>
+            <p><input type="text" name="url_<%= item.article.id %>" value="<%= item.article.url %>"/></p>
+            <p><input type="button" data-bid="<%= item.article.id %>" value="add"></p>
         </li>
     <% }) %>
     </ul>
+    <%- page %>
 <% } %>
+<script type="text/javascript">
+$(function(){
+    $("input[data-bid]").click(function(){
+        var bid = this.attr("data-bid");
+        if(bid != ""){
+            $.ajax({
+                url: "/add-queue",
+                data: {
+                    "title": $("input[name=title_]")
+                }
+            });
+        }
+    });
+});
+</script>

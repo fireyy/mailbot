@@ -1,2 +1,11 @@
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<% if (!users) { %>
+    <p>nothings</p>
+<% } else { %>
+    <ul>
+    <% users.forEach(function(user){ %>
+        <li>
+            <h3><%= user.name %>: <%= user.mail %></h3>
+        </li>
+    <% }) %>
+    </ul>
+<% } %>

@@ -1,0 +1,16 @@
+body{
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a { color: #00B7FF}
+
+.pagination li {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.pagination li.active {
+  color: #000;
+  font-weight: bold;
+}
+

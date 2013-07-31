@@ -9,10 +9,12 @@
     "express": "3.3.4",
     "express-partials": "*",
     "ejs": "*",
-    "stylus": "*",
+    "node-sass": "*",
     "passport": "*",
     "firebase": "*",
     "passport-readability": "*",
+    "nodemailer": "*",
+    "moment": "*",
     "request": "*"
   }
 }

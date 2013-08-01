@@ -4,7 +4,7 @@ var nodemailer = require("nodemailer"),
     fs = require('fs'),
     moment = require('moment'),
     zh = require('./zh-cn.js'),
-    sender = require('../libs/config.js')('smtp');
+    sender = require('./config.js')('smtp');
 
 moment.lang('zh-cn',zh);
 
@@ -18,14 +18,7 @@ var sendMail = function(sendInfo,callback) {
     var fnhtml = ejsFn({
         title: sendInfo.title,
         date: d,
-        bg: sendInfo.bg,
-        lists: sendInfo.cnt.cards ? sendInfo.cnt.cards : '',
-        members: sendInfo.cnt.members ? sendInfo.cnt.members : '',
-        checkLists: sendInfo.cnt.checkLists ? sendInfo.cnt.checkLists : '',
-        attrFile: sendInfo.cnt.attrs.cards ? sendInfo.cnt.attrs.cards : '',
-        cnt: sendInfo.cnt,
-        user : sendInfo.user,
-        uid: sendInfo._id,
+        lists: sendInfo.cnt ? sendInfo.cnt : '',
         version: '0.9'
     });
     if(!sender.server){
@@ -49,7 +42,7 @@ var sendMail = function(sendInfo,callback) {
         to: sendInfo.list,
         subject: sendInfo.sub,
         html: fnhtml
-    }
+    };
 
     smtpTransport.sendMail(mailOptions, function(error, response) {
         if(error) {

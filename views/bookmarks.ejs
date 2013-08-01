@@ -3,11 +3,11 @@
 <% } else { %>
     <ul>
     <% data.forEach(function(item){ %>
-        <li class="item_<%= item.article.id %>">
-            <p><input type="text" name="title_<%= item.article.id %>" value="<%= item.article.title %>"/></p>
-            <p><textarea name="desc_<%= item.article.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea></p>
-            <p><input type="text" name="url_<%= item.article.id %>" value="<%= item.article.url %>"/></p>
-            <p><input type="button" data-bid="<%= item.article.id %>" value="add"></p>
+        <li class="item_<%= item.id %>">
+            <p><input type="text" name="title_<%= item.id %>" value="<%= item.article.title %>"/></p>
+            <p><textarea name="excerpt_<%= item.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea></p>
+            <p><input type="text" name="url_<%= item.id %>" value="<%= item.article.url %>"/></p>
+            <p><input type="button" data-bid="<%= item.id %>" value="add"></p>
         </li>
     <% }) %>
     </ul>
@@ -16,12 +16,24 @@
 <script type="text/javascript">
 $(function(){
     $("input[data-bid]").click(function(){
-        var bid = this.attr("data-bid");
+        var bid = $(this).attr("data-bid");
+        var parent = $(".item_"+bid);
         if(bid != ""){
             $.ajax({
+                type: "POST",
                 url: "/add-queue",
                 data: {
-                    "title": $("input[name=title_]")
+                    "id": bid,
+                    "title": parent.find("[name^='title_']").val(),
+                    "excerpt": parent.find("[name^='excerpt_']").val(),
+                    "url": parent.find("[name^='url_']").val()
+                },
+                success: function(data){
+                    if(data.stat == "ok"){
+                        parent.remove();
+                    }else{
+                        alert(data.msg);
+                    }
                 }
             });
         }

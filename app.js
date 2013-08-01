@@ -66,9 +66,8 @@ app.configure('development', function(){
 app.get('/', require('./routes/index'));
 
 app.get('/bookmarks/:page', require('./routes/bookmarks'));
-app.get('/add-queue', require('./routes/add-queue'));
+app.get('/queue', require('./routes/queue'));
 app.get('/users', require('./routes/users'));
-app.get('/send', require('./routes/send'));
 
 app.get('/login', require('./routes/login'));
 
@@ -88,6 +87,9 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+app.post('/add-queue', require('./routes/add-queue'));
+app.post('/send', require('./routes/send'));
 
 app.listen(3000);
 

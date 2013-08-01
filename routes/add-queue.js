@@ -8,14 +8,25 @@ module.exports = function(req, res){
   var setQueueData = new Firebase(_config("firebase").cave+"queue")
     , data = null
     ;
-  data = req.params.bid;
-  setQueueData.update(data, function(error) {
-    if (error) {
-      alert('Data could not be saved.' + error);
-    } else {
-      alert('Data saved successfully.');
-    }
-  });
-
-  res.redirect('/login');
+  data = req.body;
+  if(data){
+    setQueueData.child(data.id).set(data, function(error) {
+      if (error) {
+        res.json({
+          stat: 'error',
+          msg: 'Data could not be saved.' + error
+        });
+      } else {
+        res.json({
+          stat: 'ok',
+          msg: '已添加到队列'
+        });
+      }
+    });
+  }else{
+    res.json({
+      stat: 'error',
+      msg: '参数错误'
+    });
+  }
 };

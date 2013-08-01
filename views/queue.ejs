@@ -1,0 +1,30 @@
+<% if (!datas) { %>
+    <p>nothings</p>
+<% } else { %>
+    <p><input type="button" value="send" id="btn_sendmail" /></p>
+    <ul>
+    <% datas.forEach(function(queue){ %>
+        <li>
+            <h3><%= queue.title %></h3>
+            <p><%- queue.excerpt %></p>
+        </li>
+    <% }) %>
+    </ul>
+<% } %>
+<script type="text/javascript">
+$(function(){
+    $("#btn_sendmail").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/send",
+            success: function(data){
+                if(data.stat == "ok"){
+                    alert(data.msg);
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+});
+</script>

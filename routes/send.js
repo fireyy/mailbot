@@ -1,33 +1,32 @@
 // 触发邮件发送
-var sendMail = require('../libs/mail.js');
+var sendMail = require('../libs/mail.js')
+  , getQueue = require('../libs/queue.js')
+  ;
 
 module.exports = function(req, res, next) {
-  var bgIMG = req.body.bgIMG;
-  var postTitle = req.body.postTitle;
-  var sendList = req.body.sendToList;
-  var objFull = doc.cache;
-      var send = {
-        title: postTitle,
-        sub : postTitle,
-        list: sendList,
-        bg: bgIMG,
-        cnt: objFull,
-        user: doc.weibo.info,
-        tpl: 'default-table',
-        _id: doc._id
-      }
+  var postTitle = "mailbot sub mail";
+  getQueue(function(datas){
+    var sendList = req.body.sendToList;
+    var objFull = datas;
+    var send = {
+      title: postTitle,
+      list: sendList,
+      cnt: objFull,
+      tpl: 'default'
+    };
 
-      sendMail(send, function(err,result){
-        if (err == null) {
-          res.json({
-            stat: 'ok',
-            msg: '邮件已成功发送'
-          })
-        } else {
-          res.json({
-            stat: 'error',
-            msg: "邮件发送失败"
-          })
-        }
-      });
+    sendMail(send, function(err,result){
+      if (err == null) {
+        res.json({
+          stat: 'ok',
+          msg: '邮件已成功发送'
+        })
+      } else {
+        res.json({
+          stat: 'error',
+          msg: "邮件发送失败"
+        })
+      }
+    });
+  });
 }

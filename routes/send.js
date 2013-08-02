@@ -4,7 +4,7 @@ var sendMail = require('../libs/mail.js')
   ;
 
 module.exports = function(req, res, next) {
-  var postTitle = "mailbot sub mail";
+  var postTitle = "前端大字报";
   getQueue(function(datas){
     var sendList = req.body.sendToList;
     var objFull = datas;

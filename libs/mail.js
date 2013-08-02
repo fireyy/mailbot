@@ -16,7 +16,7 @@ var sendMail = function(sendInfo,callback) {
 
     // send mail
     var fnhtml = ejsFn({
-        title: sendInfo.title,
+        sub: sendInfo.title,
         date: d,
         lists: sendInfo.cnt ? sendInfo.cnt : '',
         version: '0.9'
@@ -39,7 +39,7 @@ var sendMail = function(sendInfo,callback) {
 
     var mailOptions = {
         from: sender.from,
-        to: sendInfo.list,
+        to: '"fireyy" <fireyy@gmail.com>',
         subject: sendInfo.sub,
         html: fnhtml
     };

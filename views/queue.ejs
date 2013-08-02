@@ -7,6 +7,7 @@
         <li>
             <h3><%= queue.title %></h3>
             <p><%- queue.excerpt %></p>
+            <p><input type="button" value="remove" data-id="<%= queue.id %>" class="btn_remove"/></p>
         </li>
     <% }) %>
     </ul>
@@ -17,6 +18,7 @@ $(function(){
         $.ajax({
             type: "POST",
             url: "/send",
+            dataType: "json",
             success: function(data){
                 if(data.stat == "ok"){
                     alert(data.msg);
@@ -25,6 +27,19 @@ $(function(){
                 }
             }
         });
+    });
+    $(".btn_remove").click(function(){
+        if(confirm('你确定要移除吗？')){
+            var that = this;
+            var id = $(that).attr("data-id");
+            $.getJSON("/remove-queue/"+id, function(data){
+                if(data.stat == "ok"){
+                    $(that).parents('li').fadeOut(500, function() { $(this).remove(); });
+                }else{
+                    alert(data.msg);
+                }
+            });
+        }
     });
 });
 </script>

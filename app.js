@@ -67,6 +67,7 @@ app.get('/', require('./routes/index'));
 
 app.get('/bookmarks/:page', require('./routes/bookmarks'));
 app.get('/queue', require('./routes/queue'));
+app.get('/remove-queue/:id', require('./routes/remove-queue'));
 app.get('/users', require('./routes/users'));
 
 app.get('/login', require('./routes/login'));

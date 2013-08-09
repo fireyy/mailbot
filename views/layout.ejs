@@ -1,18 +1,50 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
         <title>test</title>
+
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <script type="text/javascript" src="/javascripts/jquery.js"></script>
+
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="viewport" content="width=600">
     </head>
-    <body>
-        <p>
-            <a href="/">Home</a> |
-            <a href="/login">Log In</a> |
-            <a href="/bookmarks/1">Bookmarks</a> |
-            <a href="/queue">Queue</a> |
-            <a href="/users">Users</a>
-        </p>
+    <body class="admin">
+
+        <header class="top">
+            <div class="wrap">
+                <nav>
+                    <ul>
+                        <li class="logo">
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/bookmarks/1">Bookmarks</a>
+                        </li>
+                        <li>
+                            <a href="/queue">Queue</a>
+                        </li>
+                        <li>
+                            <a href="/users">Users</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <a href="" class="btn">logout</a>
+
+            </div>
+        </header>
         <%- body %>
+
+        <footer class="wrap bottom">
+            <small>Mailbot 0.1.1</small>
+            <em>made with &lt;3</em>
+        </footer>
+
+        <script>
+            // Confirm any deletions
+            $('.delete').on('click', function() {return confirm('Do you confirm to delete this item?');});
+        </script>
     </body>
 </html>

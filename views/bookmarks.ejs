@@ -1,18 +1,32 @@
+<hgroup class="wrap">
+    <h1>Bookmarks</h1>
+</hgroup>
+<section class="wrap">
 <% if (!data) { %>
-    <p>nothings</p>
+    <p class="empty posts">
+        <span class="icon"></span>
+        Nothing
+    </p>
 <% } else { %>
-    <ul>
-    <% data.forEach(function(item){ %>
+
+    <ul class="list">
+        <% data.forEach(function(item){ %>
         <li class="item_<%= item.id %>">
-            <p><input type="text" name="title_<%= item.id %>" value="<%= item.article.title %>"/></p>
-            <p><textarea name="excerpt_<%= item.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea></p>
-            <p><input type="text" name="url_<%= item.id %>" value="<%= item.article.url %>"/></p>
-            <p><input type="button" data-bid="<%= item.id %>" value="add"></p>
+            <a href="<?php echo Uri::to('admin/categories/edit/' . $category->id); ?>">
+                <strong><input type="text" name="title_<%= item.id %>" value="<%= item.article.title %>"/></strong>
+
+                <span><input type="text" name="url_<%= item.id %>" value="<%= item.article.url %>"/></p></span>
+                <p>
+                    <textarea name="excerpt_<%= item.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea>
+                </p>
+                <p><input type="button" data-bid="<%= item.id %>" value="add"></p>
+            </a>
         </li>
-    <% }) %>
+        <% }) %>
     </ul>
     <%- page %>
 <% } %>
+</section>
 <script type="text/javascript">
 $(function(){
     $("input[data-bid]").click(function(){

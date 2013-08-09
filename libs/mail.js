@@ -16,7 +16,6 @@ var sendMail = function(sendInfo,callback) {
 
     // send mail
     var fnhtml = ejsFn({
-        sub: sendInfo.title,
         date: d,
         lists: sendInfo.cnt ? sendInfo.cnt : '',
         version: '0.9'

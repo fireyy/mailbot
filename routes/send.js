@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
     var sendList = req.body.sendToList;
     var objFull = datas;
     var send = {
-      title: postTitle,
+      sub: postTitle,
       list: sendList,
       cnt: objFull,
       tpl: 'default'

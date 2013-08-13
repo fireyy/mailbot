@@ -12,15 +12,13 @@
     <ul class="list">
         <% data.forEach(function(item){ %>
         <li class="item_<%= item.id %>">
-            <a href="<?php echo Uri::to('admin/categories/edit/' . $category->id); ?>">
-                <strong><input type="text" name="title_<%= item.id %>" value="<%= item.article.title %>"/></strong>
+            <strong><input type="text" name="title_<%= item.id %>" value="<%= item.article.title %>"/></strong>
 
-                <span><input type="text" name="url_<%= item.id %>" value="<%= item.article.url %>"/></p></span>
-                <p>
-                    <textarea name="excerpt_<%= item.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea>
-                </p>
-                <p><input type="button" data-bid="<%= item.id %>" value="add"></p>
-            </a>
+            <span><input type="text" name="url_<%= item.id %>" value="<%= item.article.url %>"/></p></span>
+            <p>
+                <textarea name="excerpt_<%= item.id %>" cols="50" rows="5"><%- item.article.excerpt %></textarea>
+            </p>
+            <p><input type="button" data-bid="<%= item.id %>" value="add"></p>
         </li>
         <% }) %>
     </ul>

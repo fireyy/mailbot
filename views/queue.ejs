@@ -1,20 +1,33 @@
+<hgroup class="wrap">
+    <h1>Queue</h1>
+    <nav>
+        <a href="/send" class="btn" id="btn_sendmail">Send</a>
+    </nav>
+</hgroup>
+<section class="wrap">
 <% if (!datas) { %>
-    <p>nothings</p>
+    <p class="empty posts">
+        <span class="icon"></span>
+        Nothing
+    </p>
 <% } else { %>
-    <p><input type="button" value="send" id="btn_sendmail" /></p>
-    <ul>
-    <% datas.forEach(function(queue){ %>
-        <li>
-            <h3><%= queue.title %></h3>
-            <p><%- queue.excerpt %></p>
-            <p><input type="button" value="remove" data-id="<%= queue.id %>" class="btn_remove"/></p>
+    <ul class="list">
+        <% datas.forEach(function(queue){ %>
+        <li class="item_<%= queue.id %>">
+            <a href="<%= queue.url %>" target="_blank" class="btn_remove" data-id="<%= queue.id %>">
+                <strong><%= queue.title %></strong>
+                <span>123123</span>
+                <p><%- queue.excerpt %></p>
+            </a>
         </li>
-    <% }) %>
+        <% }) %>
     </ul>
 <% } %>
+</section>
 <script type="text/javascript">
 $(function(){
-    $("#btn_sendmail").click(function(){
+    $("#btn_sendmail").click(function(event){
+        event && event.preventDefault();
         $.ajax({
             type: "POST",
             url: "/send",

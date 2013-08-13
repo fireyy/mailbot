@@ -63,12 +63,13 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', require('./routes/index'));
+app.get('/', ensureAuthenticated, require('./routes/index'));
 
 app.get('/bookmarks/:page', require('./routes/bookmarks'));
 app.get('/queue', require('./routes/queue'));
 app.get('/remove-queue/:id', require('./routes/remove-queue'));
 app.get('/users', require('./routes/users'));
+app.get('/subscribe', require('./routes/subscribe'));
 
 app.get('/login', require('./routes/login'));
 
@@ -91,11 +92,18 @@ app.get('/logout', function(req, res){
 
 app.post('/add-queue', require('./routes/add-queue'));
 app.post('/send', require('./routes/send'));
+app.post('/add-subscribe', require('./routes/add-subscribe'));
 
 app.listen(3000);
 
 //检查是否通过验证
 function ensureAuthenticated(req, res, next) {
+  if (req.session.uid) { return next(); }
+  res.redirect('/login')
+}
+
+//检查是否通过验证
+function ensureAuthenticated2(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login')
 }

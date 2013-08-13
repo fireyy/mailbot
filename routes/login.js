@@ -1,5 +1,6 @@
 module.exports = function(req, res){
-  if(req.session.uid){
-    res.redirect('/auth/readability');
-  }
+  res.render('login',{"layout": false});
+  // if(req.session.uid){
+  //   res.redirect('/auth/readability');
+  // }
 }

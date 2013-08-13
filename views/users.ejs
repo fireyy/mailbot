@@ -1,11 +1,25 @@
-<% if (!users) { %>
-    <p>nothings</p>
-<% } else { %>
-    <ul>
-    <% users.forEach(function(user){ %>
+<hgroup class="wrap">
+    <h1>Subscription</h1>
+</hgroup>
+
+<section class="wrap">
+    <% if (!users) { %>
+    <p class="empty posts">
+        <span class="icon"></span>
+        Nothing
+    </p>
+    <% } else { %>
+    <ul class="list">
+        <% users.forEach(function(user){ %>
         <li>
-            <h3><%= user.name %>: <%= user.mail %></h3>
+            <a href="/">
+                <strong><%=user.user%></strong>
+                <span><%=user.email%></span>
+
+                <em class="highlight">user</em>
+            </a>
         </li>
-    <% }) %>
+        <% }) %>
     </ul>
-<% } %>
+    <% } %>
+</section>

@@ -7,6 +7,6 @@ var Firebase = require('firebase')
   ;
 module.exports = function(req, res){
   getUsers(function(data){
-    res.render('users', { users: data.val() });
+    res.render('users', { users: data });
   });
 };

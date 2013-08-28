@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>test</title>
+
+        <link rel='stylesheet' href='/stylesheets/login.css' />
+        <script type="text/javascript" src="/javascripts/jquery.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="viewport" content="width=600">
+    </head>
+    <body class="login">
+        <header class="top">
+            <div class="wrap">
+                <aside class="logo">
+                    <a href="/">Mailbot</a>
+                </aside>
+            </div>
+        </header>
+
+        <section class="login content">
+            <div id="notification" class="notifications" style="display: none;"></div>
+            <form id="add-form" method="post" action="/add-subscribe">
+                <fieldset>
+                    <p><label for="email">Username:</label>
+                    <input type="text" id="user" name="user" autocapitalize="off" autofocus="true" placeholder="Username"></p>
+                    <p><label for="email">E-mail:</label>
+                    <input type="text" id="email" name="email" autocapitalize="off" autofocus="true" placeholder="E-mail"></p>
+
+                    <p class="buttons">
+                        <button type="submit">Subscribe</button>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+        <script type="text/javascript">
+        $(function(){
+            $("#add-form").submit(function(event){
+                event && event.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/add-subscribe",
+                    dataType: "json",
+                    data: $(this).serializeArray(),
+                    success: function(data){
+                        if(data.stat == "ok"){
+                            $("#add-form").hide();
+                            $("#notification").html("<p class='success'>"+data.msg+"</p>").show();
+                        }else{
+                            $("#notification").html("<p class='error'>"+data.msg+"</p>").show();
+                        }
+                    }
+                });
+            })
+        });
+        </script>
+    </body>
+</html>
